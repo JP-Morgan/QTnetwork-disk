@@ -6,20 +6,20 @@
 #include<Qtsql/QSqlDatabase>
 //查询数据库
 #include<Qtsql/QSqlQuery>
-
 #include<QStringList>
 
 
 class OpeDB : public QObject
 {
-    Q_OBJECT//支持信号槽
+    Q_OBJECT//支持信号
 public:
     explicit OpeDB(QObject *parent = nullptr);
-    //定义为单例
-    //在静态的函数中定义静态的函数对象
-    static OpeDB& getInstance();
-    //初始化数据库
+    //将数据库操作定义为单例
+    //讲解https://blog.csdn.net/weixin_33933118/article/details/93205284
+    static OpeDB &getInstance();
+    //连接数据库(初始化)
     void init();
+    //关闭数据库
     ~OpeDB();
 
     bool handleRegist(const char *name,const char *pwd);
@@ -47,7 +47,7 @@ public:
 
 signals:
 private:
-    //用来链接数据库
+    //定义连接数据库
     QSqlDatabase m_db;
 
 };

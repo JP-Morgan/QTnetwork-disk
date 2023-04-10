@@ -61,7 +61,7 @@ void MyTcpSocket::recvMsg()
         uint uiMsgLen = uiPDULen - sizeof(PDU);
         PDU *pdu = mkPDU(uiMsgLen);
         this->read((char*)pdu+sizeof(uint),uiPDULen-sizeof(uint));
-        qDebug() << pdu->uiMsgType << (char*)(pdu->caMsg);
+    //    qDebug() << pdu->uiMsgType << (char*)(pdu->caMsg);
         switch(pdu->uiMsgType){
         case ENUM_MSG_TYPE_REGIST_REQUEST:
         {

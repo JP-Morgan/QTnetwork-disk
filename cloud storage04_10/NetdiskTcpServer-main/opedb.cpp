@@ -3,43 +3,38 @@
 #include<QDebug>
 #include<QDir>
 
-//数据库
+//创建一个
 OpeDB::OpeDB(QObject *parent) : QObject(parent)
 {
-    //我们操作的数据库是什么数据库？
-    //QSQLITE数据库
+    //我们要操作的数据是==QSQLITE
     m_db = QSqlDatabase::addDatabase("QSQLITE");
 }
 
 OpeDB &OpeDB::getInstance()
 {
-    //定义一个静态的对象
+    //
     static OpeDB instance;
     return instance;
 }
 
-//数据库进行初始化
 void OpeDB::init()
 {
-    //链接数据库，如果为远程的就输入IP地址，如果为本地的就输入localhost
+    //链接数据库，本地用localhost，远地区用IP地址
     m_db.setHostName("localhost");
-//    QString path = QDir::currentPath()+"/cloud.db";
-//    m_db.setDatabaseName(":/cloud.db");   // 相对路径不好使
-    //F:\\C++project\\server\\NetdiskTcpServer-main\\cloud.db
-    //你要操作的数据库名字也就是：地址
+    //m_db.setDatabaseName(":/cloud.db");   // 相对路径不好使
+    //m_db.setDatabaseName("D:\\front\\code\\QQQQ\\NetdiskTcpServer\\cloud.db");   // 绝对路径测试下
     m_db.setDatabaseName("F:\\C++project\\server\\NetdiskTcpServer-main\\cloud.db");   // 绝对路径测试下
-    //判断打开数据库
+    //打开数据库
     if (m_db.open()){
-        //如果成功，查询测试
         QSqlQuery query;
         query.exec("select * from userInfo");
         while(query.next()){
+            //读取数据库的数据
             QString data = QString("%1,%2,%3").arg(query.value(0).toString()).arg(query.value(1).toString().arg(query.value(2).toString()));
-            qDebug() << data;
+            //qDebug() << data;
         }
         handleFirstBootOffine();
     }else{
-        //失败就提示
         QMessageBox::critical(NULL,"打开数据库","打开数据库失败");
     }
 
@@ -47,6 +42,7 @@ void OpeDB::init()
 
 OpeDB::~OpeDB()
 {
+    //关闭数据库
     m_db.close();
 }
 

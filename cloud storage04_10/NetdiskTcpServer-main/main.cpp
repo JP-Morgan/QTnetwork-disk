@@ -1,5 +1,6 @@
 ﻿#include "tcpserver.h"
 #include "opedb.h"
+#include<QDebug>
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -8,7 +9,7 @@ int main(int argc, char *argv[])
 
     OpeDB::getInstance().init();
 
-//    TcpServer w;
-//    w.show();
+    TcpServer w;
+    w.show();
     return a.exec();
 }

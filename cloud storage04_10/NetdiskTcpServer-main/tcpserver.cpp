@@ -1,4 +1,4 @@
-#include "tcpserver.h"
+﻿#include "tcpserver.h"
 #include "ui_tcpserver.h"
 #include "mytcpserver.h"
 #include<QByteArray>
@@ -30,12 +30,12 @@ void TcpServer::loadConfig()
     if(file.open(QIODevice::ReadOnly)){
         QByteArray baData = file.readAll();
         QString strData = baData.toStdString().c_str();
-        qDebug() << strData;
+        //qDebug() << strData;
         file.close();
         strData.replace("\r\n"," ");
-        qDebug() << strData ;
+        //qDebug() << strData ;
         QStringList strList = strData.split(" ");
-        qDebug() << strList ;
+        //qDebug() << strList ;
         m_strIP = strList.at(0);
         m_usPort = strList.at(1).toUShort();
         qDebug() << m_strIP ;
